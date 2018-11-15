@@ -11,6 +11,11 @@ use app\CarInformation;
 class CarInformaitonController extends Controller
 {
 
+    /*
+     * check Car Information and add data to database
+     *
+     * @return APIReturn
+     * */
     public function check(Request $request)
     {
         $input = $request->only('type','mileage','use_time','fault_info');

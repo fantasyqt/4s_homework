@@ -20,6 +20,11 @@ class UserController extends Controller
         $this->user = $user;
     }
 
+    /*
+     * User Login function
+     * @return APIReturn
+     * */
+
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -59,7 +64,11 @@ class UserController extends Controller
 
 
     }
-
+    /*
+     * User register
+     * @params Request
+     * @return APIReturn
+     *  */
     public function  register(Request $request)
     {
         $input = $request->only( 'name','email', 'password','address','phone');
@@ -100,7 +109,11 @@ class UserController extends Controller
             'msg' => 'Welcome to 4s car',
         ]);
     }
-
+    /*
+     * User get info
+     * @params Request
+     * @return APIReturn
+     * */
 
     public function  getUserInfo(Request $request)
     {

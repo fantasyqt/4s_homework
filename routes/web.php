@@ -10,7 +10,29 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
-Route::get('/', function () {
-    return view('welcome');
+Route::group(['prefix' => 'API'], function () {
+//    Route::get('/', 'IndexController@index');
+    Route::group(['prefix' => 'User'], function () {
+        Route::post('login','UserController@login');
+        Route::post('register', 'UserController@register');
+
+        Route::group(['middleware' => 'jwt.auth.mod'], function () {
+            Route::get('info', 'UserController@getUserInfo')->middleware(['jwt.refresh']);
+            // Method Need Auth
+        });
+    });
+
+
+    Route::group(['prefix' => 'CarInfo'],function(){
+       Route::group(['middleware' => 'jwt.auth.mod'],function(){
+           Route::post('check', 'CarInfomationController@check');
+           Route::post('carinfo','CarInfomationController@getInfo');
+       });
+    });
+
 });
