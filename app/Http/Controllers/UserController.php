@@ -73,7 +73,7 @@ class UserController extends Controller
     {
         $input = $request->only( 'name','email', 'password','address','phone');
         $validator = \Validator::make($input, [
-            'name' => 'require|max:30',
+            'name' => 'required|max:30',
             'email' => 'required|email|max:32',
             'password' => 'required|size:64',
             'address' => 'required',
@@ -96,10 +96,12 @@ class UserController extends Controller
         }
 
         try {
-            $team = $this->user->create([
+            $team = User::create([
                 'name' => $input['name'],
                 'email' => $input['email'],
                 'password' => bcrypt($input['password']),
+                'phone' => $input['phone'],
+                'address' => $input['address'],
                 'role' => 'customer'
             ]);
         } catch (\Exception $err) {
