@@ -16,7 +16,9 @@
 //});
 
 Route::group(['prefix' => 'API'], function () {
-//    Route::get('/', 'IndexController@index');
+    Route::get('/', function() {
+        return "123";
+    });
     Route::group(['prefix' => 'User'], function () {
         Route::post('login','UserController@login');
         Route::post('register', 'UserController@register');
