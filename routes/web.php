@@ -24,7 +24,7 @@ Route::group(['prefix' => 'API'], function () {
         Route::post('register', 'UserController@register');
 
         Route::group(['middleware' => 'jwt.auth.mod'], function () {
-            Route::get('info', 'UserController@getUserInfo')->middleware(['jwt.refresh']);
+            Route::get('info', 'UserController@getUserInfo');
             // Method Need Auth
         });
     });
@@ -32,8 +32,8 @@ Route::group(['prefix' => 'API'], function () {
 
     Route::group(['prefix' => 'CarInfo'],function(){
        Route::group(['middleware' => 'jwt.auth.mod'],function(){
-           Route::post('check', 'CarInfomationController@check');
-           Route::post('carinfo','CarInfomationController@getInfo');
+           Route::post('check', 'CarInformationController@check');
+           Route::post('carinfo','CarInformationController@getInfo');
        });
     });
 

@@ -7,8 +7,8 @@ use Illuminate\Http\Request;
 use JWTAuth;
 use Auth;
 use APIReturn;
-use app\CarInformation;
-class CarInformaitonController extends Controller
+use App\CarInformation;
+class CarInformationController extends Controller
 {
 
     /*
@@ -37,15 +37,15 @@ class CarInformaitonController extends Controller
             return APIReturn::error('invalid_parameters', $validator->errors()->all(), 400);
         }
 
-
         try{
             $info = CarInformation::create([
                 'type' => $input['type'],
-                'mileage' => $input['mileage'],
-                'use_time' => $input['use_time'],
+                'mileage' => (double)$input['mileage'],
+                'use_time' => (double)$input['use_time'],
                 'fault_info' => $input['fault_info'],
             ]);
         }catch (\Exception $e){
+            return $e;
             return APIReturn::error("some_thing_error", __("数据库读写错误"), 500);
         }
         return APIReturn::success(['info_id' => $info->id]);

@@ -4,12 +4,13 @@ namespace App\Http\Middleware;
 
 use Closure;
 use JWTAuth;
-use Tymon\JWTAuth\Exceptions\TokenExpiredException;
-use Tymon\JWTAuth\Middleware\BaseMiddleware;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException as TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException as TokenInvalidException;
+use Tymon\JWTAuth\Http\Middleware\BaseMiddleware as BaseMiddleware;
 use Tymon\JWTAuth\Exceptions\JWTException;
 
 
-class VerifyJWTToken
+class VerifyJWTToken extends BaseMiddleware
 {
     /**
      * Handle an incoming request.
@@ -25,15 +26,16 @@ class VerifyJWTToken
         }
         try {
             $user = $this->auth->authenticate($token);
-        } catch (TokenExpiredException $e) {
+        } catch (\TokenExpiredException $e) {
             return \APIReturn::error('tymon.jwt.expired', 'token_expired', $e->getStatusCode());
-        } catch (JWTException $e) {
+        } catch (\JWTException $e) {
             return \APIReturn::error('tymon.jwt.invalid', 'token_invalid', $e->getStatusCode());
         }
         if (!$user) {
             return \APIReturn::error('tymon.jwt.user_not_found', 'user_not_found', 404);
         }
-        $this->events->fire('tymon.jwt.valid', $user);
+//        $this->events->fire('tymon.jwt.valid', $user);
+//        return \APIReturn::success($user);
         return $next($request);
     }
 }
