@@ -45,7 +45,6 @@ class CarInformationController extends Controller
                 'fault_info' => $input['fault_info'],
             ]);
         }catch (\Exception $e){
-            return $e;
             return APIReturn::error("some_thing_error", __("数据库读写错误"), 500);
         }
         return APIReturn::success(['info_id' => $info->id]);

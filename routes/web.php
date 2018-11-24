@@ -33,7 +33,7 @@ Route::group(['prefix' => 'API'], function () {
     Route::group(['prefix' => 'CarInfo'],function(){
        Route::group(['middleware' => 'jwt.auth.mod'],function(){
            Route::post('check', 'CarInformationController@check');
-           Route::post('carinfo','CarInformationController@getInfo');
+           Route::post('carInfo','CarInformationController@getInfo');
        });
     });
 
