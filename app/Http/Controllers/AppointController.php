@@ -49,7 +49,7 @@ class AppointController extends Controller
     public function getAppoint(Request $request){
         try{
             $appoint = Appoint::find($request->input('id'));
-            $carinfo = CarInformation::find($request->input('appoint_car_id'));
+            $carinfo = CarInformation::find($appoint->appoint_car_id);
             return APIReturn::success($appoint,$carinfo);
         }catch (\Exception $e){
             return $e;
