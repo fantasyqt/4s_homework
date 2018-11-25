@@ -37,4 +37,11 @@ Route::group(['prefix' => 'API'], function () {
        });
     });
 
+    Route::group(['prefix' => 'Appoint'],function(){
+        Route::group(['middleware' => 'jwt.auth.mod'],function(){
+            Route::post('check', 'AppointController@check');
+            Route::post('appointinfo', 'AppointController@getAppoint');
+        });
+    });
+
 });

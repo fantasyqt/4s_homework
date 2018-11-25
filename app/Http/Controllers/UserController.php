@@ -45,17 +45,20 @@ class UserController extends Controller
 
         $access_token = null;
         try {
+
             if (Auth::once($credentials)) {
                 $user = Auth::getUser();
+
             } else {
                 return APIReturn::error("invalid_email_or_password", __("Email 与密码不匹配"), 401);
             }
             if (!$user) {
                 return APIReturn::error("invalid_email_or_password", __("Email 与密码不匹配"), 401);
+
             } else {
-                $access_token = JWTAuth::fromUser($user//, [
-//                    'role' => $user->role]
-                );
+                //return dd($user);
+                $access_token = \JWTAuth::fromUser($user);
+
             }
         } catch (\Exception  $e) {
             return APIReturn::error("database_error", "数据库读写错误", 500);
