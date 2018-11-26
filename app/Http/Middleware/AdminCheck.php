@@ -3,8 +3,13 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException as TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException as TokenInvalidException;
+use Tymon\JWTAuth\Http\Middleware\BaseMiddleware as BaseMiddleware;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
-class AdminCheck
+class AdminCheck extends BaseMiddleware
 {
     /**
      * Handle an incoming request.

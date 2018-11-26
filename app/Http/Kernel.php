@@ -3,7 +3,7 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
-
+use App\Http\Middleware\AdminCheck;
 class Kernel extends HttpKernel
 {
     /**
@@ -63,6 +63,7 @@ class Kernel extends HttpKernel
 //        'jwt.auth' => \Tymon\JWTAuth\Middleware\GetUserFromToken::class,
         'jwt.refresh' => \Tymon\JWTAuth\Middleware\RefreshToken::class,
         'jwt.auth.mod' => \App\Http\Middleware\VerifyJWTToken::class,
+        'AdminCheck' => \App\Http\Middleware\AdminCheck::class,
     ];
 
     /**
