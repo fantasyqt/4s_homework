@@ -42,6 +42,7 @@ Route::group(['prefix' => 'API'], function () {
         Route::group(['middleware' => 'jwt.auth.mod'],function(){
             Route::post('check', 'AppointController@check');
             Route::post('appointinfo', 'AppointController@getAppoint');
+            Route::get('appointall','AppointController@getAllAppoint');
         });
     });
 
