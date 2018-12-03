@@ -46,12 +46,19 @@ Route::group(['prefix' => 'API'], function () {
         });
     });
 
+    Route::group(['prefix' => 'Sale'],function(){
+        Route::post('info', 'SaleController@getSale');
+        Route::group(['middleware' => ['jwt.auth.mod','AdminCheck']],function(){
+            Route::post('insert', 'SaleController@insertSale');
+        });
+    });
+
     /**
      * 客服答疑，/API/Question/info?...获取问题，获取文本和答案
      *          /API/Question/insert?...设置/传入新问题，并检测其合法性
      */
     Route::group(['prefix' => 'Question'],function(){
-        Route::get('info', 'QuestionController@getQuestion');
+        Route::post('info', 'QuestionController@getQuestion');
         Route::group(['middleware' => ['jwt.auth.mod','AdminCheck']],function(){
             Route::post('insert', 'QuestionController@insert');
         });
