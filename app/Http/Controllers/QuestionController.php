@@ -37,7 +37,7 @@ class QuestionController extends Controller
         }catch (\Exception $e){
             return APIReturn::error("some_thing_error",__("数据库读写错误"),500);
         }
-        return APIReturn::success(['id' => $question->id]);
+        return APIReturn::success(['msg' => "insert success"]);
 
     }
 

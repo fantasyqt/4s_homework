@@ -79,7 +79,7 @@ class UserController extends Controller
             'name' => 'required|max:30',
             'email' => 'required|email|max:32',
             'password' => 'required|size:64',
-            'address' => 'required',
+//            'address' => 'required',
             'phone' => 'required|size:11'
         ], [
             'name.required' => __('缺少用户名字段'),
@@ -89,7 +89,7 @@ class UserController extends Controller
             'email.max' => __('Email 过长'),
             'password.required' => __('缺少密码字段'),
             'password.size' => __('密码字段不合法'),
-            'address.required' => __('缺少地址字段'),
+//            'address.required' => __('缺少地址字段'),
             'phone.required' => __('缺少手机字段'),
             'phone.size' => __('手机不合法'),
         ]);
@@ -104,7 +104,7 @@ class UserController extends Controller
                 'email' => $input['email'],
                 'password' => bcrypt($input['password']),
                 'phone' => $input['phone'],
-                'address' => $input['address'],
+                'address' => isset($input['address'])?$input['address']:'',
                 'role' => 'customer'
             ]);
         } catch (\Exception $err) {
