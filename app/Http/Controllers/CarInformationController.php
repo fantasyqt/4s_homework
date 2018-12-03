@@ -18,7 +18,10 @@ class CarInformationController extends Controller
      * */
     public function check(Request $request)
     {
-        $input = $request->only('type','mileage','use_time','fault_info');
+        $wrong = $request->only('youliang','shuiliang','shuiwen','qidong','wending','xiangsheng','zhuanxiang','shache','lihe','biansuxiang','chedeng');
+        $fault_info = json_encode($wrong);
+        $input = $request->only('type','mileage','use_time');
+        $input['fault_info'] = $fault_info;
         $validator = \Validator::make($input, [
             'type' => 'required',
             'mileage' => 'required|numeric',
