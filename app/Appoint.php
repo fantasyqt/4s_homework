@@ -11,4 +11,7 @@ class Appoint extends Model
         'appoint_name','appoint_time','appoint_description','appoint_car_id'
     ];
 
+    protected $hidden = [
+        'created_at','updated_at'
+    ];
 }
