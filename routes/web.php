@@ -63,6 +63,12 @@ Route::group(['prefix' => 'API'], function () {
             Route::post('insert', 'QuestionController@insert');
         });
     });
+    /**
+     * 车型推送，/API/CarType/all 获取全部车型推送的数据，包括标题和简述
+     */
+    Route::group(['prefix' => 'CarType'],function(){
+        Route::get('all', 'CarTypeController@getAll');
+    });
 
 
 });
